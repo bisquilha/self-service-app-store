@@ -1,0 +1,38 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Build server, desktop app, agent and shared contract
+        run: dotnet build LojaDeApps.sln -c Release
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: src/Loja.Admin/package-lock.json
+      - name: Admin panel (type check + build + WCAG contrast check)
+        working-directory: src/Loja.Admin
+        run: |
+          npm ci
+          npm run build
+          npm run check:contrast
+      - name: Test scripts parse in Windows PowerShell 5.1
+        shell: powershell
+        run: |
+          $falhas = 0
+          foreach ($f in Get-ChildItem tests, deploy, tactical -Recurse -Filter *.ps1) {
+            $tokens = $null; $errs = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($f.FullName, [ref]$tokens, [ref]$errs) | Out-Null
+            if ($errs.Count) { $falhas += $errs.Count; $errs | ForEach-Object { Write-Host "$($f.Name): $($_.Message)" } }
+          }
+          if ($falhas) { exit 1 }
+      # The 17 API test suites (tests/run-suites.ps1) need a domain-joined PC (Active Directory), so they run locally, not here.
