@@ -1,0 +1,41 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Tema escuro (quando o Windows está no modo escuro para aplicativos). Mesmas chaves de Light.xaml. -->
+
+    <SolidColorBrush x:Key="BgWindow" Color="#12161C" />
+    <SolidColorBrush x:Key="BgSurface" Color="#1C222B" />
+    <SolidColorBrush x:Key="BgSurfaceAlt" Color="#171C23" />
+    <SolidColorBrush x:Key="BgHover" Color="#262F3B" />
+    <SolidColorBrush x:Key="BorderSubtle" Color="#323B48" />
+    <SolidColorBrush x:Key="BorderStrong" Color="#8591A2" />
+
+    <SolidColorBrush x:Key="TextPrimary" Color="#E7EBF1" />
+    <SolidColorBrush x:Key="TextSecondary" Color="#B2BCCA" />
+    <SolidColorBrush x:Key="TextMuted" Color="#9AA5B5" />
+
+    <SolidColorBrush x:Key="Accent" Color="#2F6FDB" />
+    <SolidColorBrush x:Key="AccentHover" Color="#2A63C4" />
+    <SolidColorBrush x:Key="OnAccent" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="AccentLine" Color="#6FA3F5" />
+    <SolidColorBrush x:Key="AccentText" Color="#8CB6FA" />
+    <SolidColorBrush x:Key="AccentSoft" Color="#243650" />
+
+    <SolidColorBrush x:Key="OkText" Color="#6FD09A" />
+    <SolidColorBrush x:Key="BadText" Color="#FF9A90" />
+    <SolidColorBrush x:Key="BadButton" Color="#C4372A" />
+    <SolidColorBrush x:Key="WarnText" Color="#F3D08B" />
+    <SolidColorBrush x:Key="WarnBg" Color="#33270F" />
+    <SolidColorBrush x:Key="WarnBorder" Color="#7A5A1C" />
+
+    <SolidColorBrush x:Key="HeaderBg" Color="#16283F" />
+    <SolidColorBrush x:Key="HeaderText" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="HeaderSubtext" Color="#B9C7DB" />
+    <SolidColorBrush x:Key="HeaderButtonBorder" Color="#7F96B5" />
+    <SolidColorBrush x:Key="HeaderButtonHover" Color="#24406A" />
+
+    <SolidColorBrush x:Key="InfoBarBg" Color="#1B2C47" />
+    <SolidColorBrush x:Key="InfoBarBorder" Color="#345A94" />
+    <SolidColorBrush x:Key="InfoBarText" Color="#AFCBFF" />
+
+    <SolidColorBrush x:Key="FocusRing" Color="#8AB4F8" />
+</ResourceDictionary>

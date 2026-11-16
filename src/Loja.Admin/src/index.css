@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* O tema escuro é a classe .dark no <html>; o main.tsx liga e desliga conforme o sistema (prefers-color-scheme). */
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Fonte do sistema (a mesma do painel antigo): nada de fonte embutida no pacote. */
+  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-sans);
+  --font-mono: Consolas, "Cascadia Mono", ui-monospace, monospace;
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-switch-off: var(--switch-off);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-violet: var(--violet);
+  --color-violet-soft: var(--violet-soft);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Cores herdadas do painel antigo (legado/painel-antigo-1.4.1/admin.css), para a identidade da TI continuar a mesma. */
+:root {
+  color-scheme: light;
+  --background: #f3f6fb;
+  --foreground: #1c2733;
+  --card: #ffffff;
+  --card-foreground: #1c2733;
+  --popover: #ffffff;
+  --popover-foreground: #1c2733;
+  --primary: #1f6bd6;
+  --primary-foreground: #ffffff;
+  --secondary: #f7f9fb;
+  --secondary-foreground: #1c2733;
+  --muted: #f7f9fb;
+  --muted-foreground: #647180;
+  --accent: #eef4ff;
+  --accent-foreground: #1c2733;
+  --destructive: #c0392b;
+  --destructive-soft: #fbeae8;
+  --destructive-foreground: #ffffff;
+  --success: #1c7d45;
+  --success-soft: #e6f4ec;
+  --warning: #9e610c;
+  --warning-soft: #fdf3e2;
+  --violet: #6d4fd6;
+  --violet-soft: #efeafc;
+  --border: #e2e7ee;
+  /* Borda de campo e trilho do switch desligado: precisam de 3:1 contra o fundo do cartão (WCAG 1.4.11). */
+  --input: #838d9a;
+  --switch-off: #8895a3;
+  --ring: #1f6bd6;
+  --chart-1: #1f6bd6;
+  --chart-2: #1c7d45;
+  --chart-3: #9e610c;
+  --chart-4: #c0392b;
+  --chart-5: #6d4fd6;
+  --radius: 0.625rem;
+  --sidebar: #14294d;
+  --sidebar-foreground: #dfe7f1;
+  --sidebar-muted: #a9bad0;
+  --sidebar-primary: #3aa3ff;
+  --sidebar-primary-foreground: #04101f;
+  --sidebar-accent: rgb(58 163 255 / 20%);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgb(255 255 255 / 8%);
+  --sidebar-ring: #7cc0ff;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #0a1020;
+  --foreground: #e6ecf7;
+  --card: #0f1830;
+  --card-foreground: #e6ecf7;
+  --popover: #0f1830;
+  --popover-foreground: #e6ecf7;
+  --primary: #3aa3ff;
+  --primary-foreground: #04101f;
+  --secondary: #141f3b;
+  --secondary-foreground: #e6ecf7;
+  --muted: #141f3b;
+  --muted-foreground: #9aa9c4;
+  --accent: #10305a;
+  --accent-foreground: #e6ecf7;
+  --destructive: #ff7b6f;
+  --destructive-soft: #3a1b22;
+  --destructive-foreground: #1a0b09;
+  --success: #3fd68f;
+  --success-soft: #0d2f27;
+  --warning: #f2b64f;
+  --warning-soft: #35290f;
+  --violet: #b199ff;
+  --violet-soft: #251d4d;
+  --border: #1f2c4d;
+  --input: #5f7299;
+  --switch-off: #5c6f96;
+  --ring: #3aa3ff;
+  --chart-1: #3aa3ff;
+  --chart-2: #3fd68f;
+  --chart-3: #f2b64f;
+  --chart-4: #ff7b6f;
+  --chart-5: #b199ff;
+  --sidebar: #08122a;
+  --sidebar-foreground: #dbe6f6;
+  --sidebar-muted: #a6b6d2;
+  --sidebar-primary: #3aa3ff;
+  --sidebar-primary-foreground: #04101f;
+  --sidebar-accent: rgb(58 163 255 / 18%);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgb(255 255 255 / 8%);
+  --sidebar-ring: #3aa3ff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground text-sm antialiased;
+  }
+}
+
+/* Tema escuro: cartões com borda de luz discreta e sombra funda, como nas referências visuais. */
+.dark [data-slot="card"],
+.dark [data-slot="stat-card"] {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%), 0 12px 32px -14px rgb(0 0 0 / 65%);
+}
+
+/* Quem pediu menos movimento no sistema não vê transições nem animações. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

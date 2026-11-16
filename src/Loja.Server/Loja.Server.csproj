@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Loja.Server</RootNamespace>
+    <AssemblyName>Loja.Server</AssemblyName>
+    <Version>1.8.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="8.0.32" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.32" />
+    <!-- Converte os ícones SVG do Chocolatey em PNG (o app de desktop não desenha SVG). -->
+    <PackageReference Include="Svg" Version="3.4.8" />
+    <!-- Busca de usuários no AD para o "Ver como usuário" do painel. -->
+    <PackageReference Include="System.DirectoryServices" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Loja.Shared\Loja.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Segredos ficam só no servidor; nunca vão no pacote publicado. -->
+    <Content Update="appsettings.Production.json" CopyToPublishDirectory="Never" />
+    <!-- A configuração de desenvolvimento liga o Tactical simulado e admin para todos: nunca publicar. -->
+    <Content Update="appsettings.Development.json" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
+</Project>
+

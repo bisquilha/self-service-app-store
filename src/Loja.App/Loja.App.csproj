@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Loja.App</RootNamespace>
+    <AssemblyName>LojaDeAplicativos</AssemblyName>
+    <Product>Loja de Aplicativos</Product>
+    <Version>1.4.0</Version>
+    <ApplicationIcon>Assets\loja.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Icone da loja: no .exe (ApplicationIcon) e na janela (Icon), gerado por deploy\Gerar-Icone.ps1. -->
+    <Resource Include="Assets\loja.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Loja.Shared\Loja.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Fica ao lado do .exe (fora do arquivo único) para a TI poder editar. -->
+    <None Update="loja.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+
+</Project>
+

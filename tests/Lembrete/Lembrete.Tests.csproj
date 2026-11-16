@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Loja.App</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Só as regras (sem WPF nem rede): rodam em qualquer dotnet. Uso: dotnet run, dentro da pasta tests\Lembrete. -->
+    <Compile Include="..\..\src\Loja.App\ReminderPolicy.cs" Link="ReminderPolicy.cs" />
+  </ItemGroup>
+
+</Project>
