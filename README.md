@@ -8,6 +8,16 @@ Built from scratch and running in production at a multi-site company (hundreds o
 
 ---
 
+## Screenshots
+
+Admin panel with demo data (simulated RMM, fictitious users and machines):
+
+![Overview: requests per day, system health checks](docs/screenshots/admin-overview.jpg)
+
+![Apps: catalog per AD group, auto-update and uninstall switches, pending updates](docs/screenshots/admin-apps.jpg)
+
+![Machines: RMM agents, duplicate and stale agents flagged, servers blocked](docs/screenshots/admin-machines.jpg)
+
 ## Pieces
 
 | Folder | What it is | Stack |
