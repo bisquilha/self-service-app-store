@@ -1,6 +1,6 @@
 # Self-Service App Store for Windows Domains
 
-[![build](https://github.com/bisquilha/self-service-app-store/actions/workflows/build.yml/badge.svg)](https://github.com/bisquilha/self-service-app-store/actions/workflows/build.yml)
+[![build](https://github.com/gabrielsilva-it/self-service-app-store/actions/workflows/build.yml/badge.svg)](https://github.com/gabrielsilva-it/self-service-app-store/actions/workflows/build.yml)
 
 An internal, free **app store for company PCs**. Employees install approved software by themselves, **without local admin rights and without opening a ticket**, while IT decides who can install what through Active Directory groups and keeps a full audit trail.
 
