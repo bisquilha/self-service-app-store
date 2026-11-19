@@ -20,7 +20,7 @@ param(
     [string]$CertSha256 = '__CERT__',        # SHA-256 do certificado do servidor (vazio so em teste com http)
     [string]$HashExe = '__HASH__',           # SHA-256 do LojaAgent.exe que sera instalado
     [string]$ChocoPath = '',
-    [string]$InternalFeed = ''
+    [string]$InternalFeed = '__FEED__'      # pasta dos pacotes internos (.nupkg), a mesma do feed da loja; sem ela o agente nao acha os apps internos
 )
 
 $ErrorActionPreference = 'Stop'
@@ -42,7 +42,22 @@ try {
     $exeInstalado = Join-Path $env:ProgramFiles 'Loja de Aplicativos\Agent\LojaAgent.exe'
     $servico = Get-Service -Name 'LojaAgent' -ErrorAction SilentlyContinue
     if ($servico -and $servico.Status -eq 'Running' -and (Test-Path $exeInstalado) -and (Get-FileHash $exeInstalado -Algorithm SHA256).Hash -eq $HashExe) {
-        Escrever 'agente ja instalado e em execucao: nada a fazer'
+        # Em dia. So confere a pasta dos pacotes internos no agent.json: agente instalado sem ela nao acha os apps internos.
+        $cfgPath = Join-Path $env:ProgramData 'LojaAgent\agent.json'
+        $cfg = $null
+        try { $cfg = Get-Content -LiteralPath $cfgPath -Raw | ConvertFrom-Json } catch { }
+        if ($InternalFeed -and $cfg -and $cfg.InternalFeed -ne $InternalFeed) {
+            $cfg | Add-Member -NotePropertyName InternalFeed -NotePropertyValue $InternalFeed -Force
+            [IO.File]::WriteAllText($cfgPath, ($cfg | ConvertTo-Json -Depth 5), (New-Object Text.UTF8Encoding($false)))
+            Restart-Service -Name 'LojaAgent' -Force
+            Start-Sleep -Seconds 5
+            $sv = Get-Service -Name 'LojaAgent' -ErrorAction SilentlyContinue
+            if ($sv -and $sv.Status -ne 'Running') { Start-Service -Name 'LojaAgent' }
+            Escrever 'pasta de pacotes internos configurada no agente e servico reiniciado'
+        }
+        else {
+            Escrever 'agente ja instalado e em execucao: nada a fazer'
+        }
         exit 0
     }
 
@@ -72,6 +87,9 @@ try {
         $codigo = $LASTEXITCODE
         Escrever ("LojaAgent install: codigo $codigo | " + ($saida -replace '\s+', ' ').Trim())
         if ($codigo -ne 0) { throw "O instalador do agente falhou (codigo $codigo)." }
+        Start-Sleep -Seconds 3
+        $sv = Get-Service -Name 'LojaAgent' -ErrorAction SilentlyContinue
+        if ($sv -and $sv.Status -ne 'Running') { Start-Service -Name 'LojaAgent'; Escrever 'servico iniciado depois da instalacao' }
     }
     finally {
         Remove-Item $tmpDir -Recurse -Force -ErrorAction SilentlyContinue

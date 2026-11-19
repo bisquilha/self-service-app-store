@@ -15,7 +15,8 @@ param(
     [Parameter(Mandatory)][string]$ServerUrl,
     [string]$CertSha256 = '',
     [Parameter(Mandatory)][string]$Origem,
-    [string]$Saida = ''
+    [string]$Saida = '',
+    [string]$FeedInterno = ''      # pasta dos pacotes internos (ex.: \\fileserver\share\loja-pacotes); vai para o agent.json de cada estacao
 )
 
 $ErrorActionPreference = 'Stop'
@@ -42,7 +43,7 @@ $hash = (Get-FileHash "$Saida\LojaAgent.exe" -Algorithm SHA256).Hash
 Set-Content "$Saida\LojaAgent.exe.sha256" "$hash  LojaAgent.exe" -Encoding ASCII
 
 $modelo = Get-Content "$PSScriptRoot\Instalar-Agente.ps1" -Raw
-$modelo = $modelo.Replace('__ORIGEM__', $Origem).Replace('__SERVER__', $ServerUrl.TrimEnd('/')).Replace('__CERT__', ($CertSha256 -replace '[: ]', '')).Replace('__HASH__', $hash)
+$modelo = $modelo.Replace('__ORIGEM__', $Origem).Replace('__SERVER__', $ServerUrl.TrimEnd('/')).Replace('__CERT__', ($CertSha256 -replace '[: ]', '')).Replace('__HASH__', $hash).Replace('__FEED__', $FeedInterno)
 Set-Content "$Saida\Instalar-Agente.ps1" $modelo -Encoding ASCII
 
 $versao = (Get-Item "$Saida\LojaAgent.exe").VersionInfo.FileVersion
